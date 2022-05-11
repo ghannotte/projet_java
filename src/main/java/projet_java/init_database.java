@@ -12,11 +12,10 @@ import java.nio.file.Path;
 public class init_database {
 	
 	static  String url = "jdbc:mysql://localhost:3306?serverTimezone=UTC&useSSL=false";
-	   static final String user = "root";
-	   static final String mdp = "root";
+
 	   
 	   
-	   public static void  Creatdb(String dbname) {
+	   public static void  Creatdb(String dbname,String user,String mdp) {
 		 
 		   try(Connection conn = DriverManager.getConnection(url,user, mdp);
 			         Statement stmt = conn.createStatement();

@@ -14,15 +14,19 @@ public class main {
 	int a=1;
 	while (a>0) {
 		Scanner myObj = new Scanner(System.in);
-		System.out.println("1:import csv 2:init db 3:query db ");
+		System.out.println("1:import csv 2:init db O:quitter  ");
 		
 	    String choixstring = myObj.nextLine();
 	    int choix=Integer.parseInt(choixstring);  
 		
 		
 		if(choix == 1){
-									
-			List imports = finder_class.imports("C:\\Users\\User\\Desktop\\");	
+			
+			Scanner paths = new Scanner(System.in);
+		    System.out.println("Enter directory path (format attendu: C:\\Users\\User\\Desktop\\ )");
+		    String path = paths.nextLine();
+		    
+			List imports = finder_class.imports(path);	
 			
 			
 			for (int i = 0; i < imports.size(); i++) {
@@ -38,7 +42,16 @@ public class main {
 	    	Scanner dbnames = new Scanner(System.in);
 			System.out.println("Enter database name");
 		    String dbname = dbnames.nextLine();
-		    init_database.Creatdb(dbname);	        
+		    
+		    Scanner dbusers = new Scanner(System.in);
+		    System.out.println("Enter mysql user");
+		    String dbuser = dbusers.nextLine();
+		    
+		    Scanner dbroots = new Scanner(System.in);
+		    System.out.println("Enter mysql mdp");
+		    String dbroot = dbroots.nextLine();
+		    
+		    init_database.Creatdb(dbname,dbuser,dbroot);	        
 	    }
 	     
 	    else if(choix == 0){
