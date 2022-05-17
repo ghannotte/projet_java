@@ -13,11 +13,11 @@ public interface tool_file {
 	
 	public static void  write(String[] dbname, String filename,boolean state) {
 	
-		try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(filename, state)));) {
+		try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(filename, state)));) {//j'initialise un printWriter qui va ciblé le fichier souhaité. La classe peut soit écrire à la suite, soit écraser
   		  
             for (String sousTab:  dbname) {
             	
-            	out.write(sousTab+",");
+            	out.write(sousTab+",");// j'écit le contenu dans une ligne avec un format csv
             	
             }
             out.write("\n");

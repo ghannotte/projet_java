@@ -15,11 +15,11 @@ public class init_database {
 
 	   
 	   
-	   public static void  Creatdb(String dbname,String user,String mdp) {
+	   public static void  Creatdb(String dbname,String user,String mdp) throws Exception{
 		 
-		   try(Connection conn = DriverManager.getConnection(url,user, mdp);
+		   try{Class.forName("com.mysql.cj.jdbc.Driver");Connection conn = DriverManager.getConnection(url,user, mdp);
 			         Statement stmt = conn.createStatement();
-			      ) {		      
+			      		      
 			         String sql = "CREATE DATABASE "+dbname;
 			         stmt.executeUpdate(sql);
 			         System.out.println("Database "+dbname+" est cree");
@@ -31,9 +31,9 @@ public class init_database {
 		   
 		  String urls = "jdbc:mysql://localhost:3306"+"/"+dbname+"?serverTimezone=UTC&useSSL=false";
 		  
-		   try(Connection conn = DriverManager.getConnection(urls,user, mdp);
+		   try{Class.forName("com.mysql.cj.jdbc.Driver");Connection conn = DriverManager.getConnection(urls,user, mdp);
 			         Statement stmt = conn.createStatement();
-			      ) {
+			     
 			         
 			         String sql2 = "CREATE Table assure(Numero_Securite_Sociale int,Nom varchar(20), Prenom varchar(20), Date_Naissance date, Numero_Telephone varchar(13) , E_Mail varchar(20), ID_Remboursement int , Code_Soin int, Montant_Remboursement int)";
 			         String sql3 = "CREATE Table historic(ID_Remboursement int,Methode varchar(10), timestamp timestamp)";

@@ -17,15 +17,15 @@ public interface finder {
 		  
 		   List files = new ArrayList();
 		   List result = new ArrayList();
-		   Path dir = Paths.get(path);
+		   Path dir = Paths.get(path); //j'inialise une variable path avec le path donné en arguement
 		   String entri ;
 	        try {
-	            DirectoryStream<Path> ds = Files.newDirectoryStream(dir, "*.csv");
-	            for (Path entry: ds) {	            	
+	            DirectoryStream<Path> ds = Files.newDirectoryStream(dir, "*.csv"); //je vais filtrer et récupére le path des fichiers csv
+	            for (Path entry: ds) {	 //pour chacun des path           	
 	            	entri=entry.toString();
 	            	
-	            	if(entri.matches(".*_[0-9]{14,15}.csv")){
-	                files.add(entri);
+	            	if(entri.matches(".*_[0-9]{14,15}.csv")){//je vérifie avec la regex qu'ils ont le bon format
+	                files.add(entri);//si oui je les rajoutes à la liste
 	            	}
 	            }
 	        } catch (IOException e) {

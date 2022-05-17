@@ -9,62 +9,34 @@ import java.util.Scanner;
 public class main {
 
 	
-	public static void main(String args[]) {
+	public static void main(String args[]) throws Exception {
 	
-	int a=1;
-	while (a>0) {
-		Scanner myObj = new Scanner(System.in);
-		System.out.println("1:import csv 2:init db O:quitter  ");
 		
-	    String choixstring = myObj.nextLine();
-	    int choix=Integer.parseInt(choixstring);  
+		
+	    int choix=Integer.parseInt(args[0]);  //l'utilisateur fais son choix 1 pour inserer un csv et 2 pour initialiser la database
 		
 		
 		if(choix == 1){
 			
-			Scanner paths = new Scanner(System.in);
-		    System.out.println("Enter directory path (format attendu: C:\\Users\\User\\Desktop\\ )");
-		    String path = paths.nextLine();
+
+		    String path = args[1];
 		    
-			List imports = finder_class.imports(path);	
+			List imports = finder_class.imports(path);	// Cette classe va me retourner une liste avec toutes les lignes de tous les csv dans le repertoire indiqué dans la commande
 			
 			
-			for (int i = 0; i < imports.size(); i++) {
+			for (int i = 0; i < imports.size(); i++) { //pour chaque ligne de la list imports
 				
-				String[] c= finder_class.split(imports.get(i));
+				String[] c= finder_class.split(imports.get(i)); //je split la ligne
 				
-				db.check(c);
+				db.check(c); //j'envoie vers cette classe qui fera un inserte ou uptdate
 				
 				
 			}
 		}
 	    else if(choix == 2){
-	    	Scanner dbnames = new Scanner(System.in);
-			System.out.println("Enter database name");
-		    String dbname = dbnames.nextLine();
-		    
-		    Scanner dbusers = new Scanner(System.in);
-		    System.out.println("Enter mysql user");
-		    String dbuser = dbusers.nextLine();
-		    
-		    Scanner dbroots = new Scanner(System.in);
-		    System.out.println("Enter mysql mdp");
-		    String dbroot = dbroots.nextLine();
-		    
-		    init_database.Creatdb(dbname,dbuser,dbroot);	        
+		    init_database.Creatdb(args[1],args[2],args[3]);	 // j'initialise ma database avec son nom et les identifiants mysql       
 	    }
-	     
-	    else if(choix == 0){
-	    
-	        break;
-	    }
-	    
-	    else{
-	    
-	    	break;
-	    }
-		
-	}
+
 	}
 }
 
