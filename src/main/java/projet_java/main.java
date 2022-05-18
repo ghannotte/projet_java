@@ -28,13 +28,13 @@ public class main {
 				
 				String[] c= finder_class.split(imports.get(i)); //je split la ligne
 				
-				db.check(c); //j'envoie vers cette classe qui fera un inserte ou uptdate
+				db.check(c); //j'envoie vers cette classe qui fera un inserte ou uptdate dans la base choisit
 				
 				
 			}
 		}
 	    else if(choix == 2){
-		    init_database.Creatdb(args[1],args[2],args[3]);	 // j'initialise ma database avec son nom et les identifiants mysql       
+		    init_database.Creatdb(args[3],args[4],args[5],args[2],args[1]);	 // j'initialise ma database avec, le type de base, le port, identifiant sur la base, le mdp de cette id et le nom de la base        
 	    }
 
 	}

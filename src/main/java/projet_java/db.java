@@ -14,9 +14,9 @@ public class db extends init_database implements import_all{
 	 public static void  insert(String[] dbname) {
 		         List u =import_csv.creat("dbconfig.csv"); //je récupére la conf de ma database
 		         String[] a=finder_class.split(u);//je split les éléements de cette conf
-		         String uri = "jdbc:mysql://localhost:3306/"+a[0].replaceAll("[\\[\\]]", "")+"?serverTimezone=UTC&useSSL=false"; //j'initialise ma connection à la base
-		       //je créer ma requéte d'inserte dans la table assure (je l'ai appelé comme cela, çela corespond plutot à la table remboursement. Les valeurs corespondes à la ligne d'un des csv qui est dans une liste de string
-				 String query1 = "INSERT INTO assure " + "VALUES ("+dbname[0]+","+"'"+dbname[1]+"'"+","+"'"+dbname[2]+"'"+","+"'"+dbname[3]+"'"+","+"'"+dbname[4]+"'"+","+"'"+dbname[5]+"'"+","+dbname[6]+","+dbname[7]+","+dbname[8]+")";
+		         String uri = "jdbc:"+a[4]+"://localhost:"+a[3]+"/"+a[0].replaceAll("[\\[\\]]", "")+"?serverTimezone=UTC&useSSL=false"; //j'initialise ma connection à la base
+		       //je créer ma requéte d'inserte dans la table remboursement. Les valeurs corespondent à la ligne d'un des csv qui est dans une liste de string
+				 String query1 = "INSERT INTO remboursement " + "VALUES ("+dbname[0]+","+"'"+dbname[1]+"'"+","+"'"+dbname[2]+"'"+","+"'"+dbname[3]+"'"+","+"'"+dbname[4]+"'"+","+"'"+dbname[5]+"'"+","+dbname[6]+","+dbname[7]+","+dbname[8]+")";
 				 String query2 = "INSERT INTO historic " + "VALUES ("+dbname[6]+","+"'INSERT',"+"'"+dbname[9]+"'"+")"; //je créer ma requéte pour ajouter la nouvelle insert dans la table historique
 				 String users= a[1].toString();//je récupére le user mysql
 				 String mdps= a[2].toString();//je récupére le mdp mysql
@@ -37,10 +37,11 @@ public class db extends init_database implements import_all{
 				 public static void  check(String[] dbname) {
 			         List u =import_csv.creat("dbconfig.csv");
 			         String[] a=finder_class.split(u);
-			         String uri = "jdbc:mysql://localhost:3306/"+a[0].replaceAll("[\\[\\]]", "")+"?serverTimezone=UTC&useSSL=false";
-					 String query1 = "SELECT * FROM assure WHERE ID_Remboursement="+dbname[6];//j'initialise le test pour savoir si un id de payement est dans la base
+			         String uri = "jdbc:"+a[4]+"://localhost:"+a[3]+"/"+a[0].replaceAll("[\\[\\]]", "")+"?serverTimezone=UTC&useSSL=false";
+					 String query1 = "SELECT * FROM remboursement WHERE ID_Remboursement="+dbname[6];//j'initialise le test pour savoir si un id de payement est dans la base
 					 String users= a[1].toString();
 					 String mdps= a[2].toString();
+					 
 					 
 					 
 					 try(Connection conn = DriverManager.getConnection(uri,users.replaceAll("[\\[\\]]", ""), mdps.replaceAll("[\\[\\]]", ""));
@@ -51,7 +52,7 @@ public class db extends init_database implements import_all{
 							 db.insert(dbname); //si non j'appelle la methode insert
 							 
 						 }else {
-							 db.update(dbname);//si oui j'appelle la methode insert
+							 db.update(dbname);//si oui j'appelle la methode update
 							 
 						 }
 						 
@@ -60,11 +61,11 @@ public class db extends init_database implements import_all{
 					      }
 					    	   
 					   }
-					 public static void  update(String[] dbname) { // exactement la méme méthode que pour l'inserte, seul les requétes changes
+					 public static void  update(String[] dbname) { // exactement la méme méthode que pour l'insert, seul la requéte changes pour faire un update
 				         List u =import_csv.creat("dbconfig.csv");
 				         String[] a=finder_class.split(u);
-				         String uri = "jdbc:mysql://localhost:3306/"+a[0].replaceAll("[\\[\\]]", "")+"?serverTimezone=UTC&useSSL=false";
-						 String query1 = "UPDATE assure " + "SET Numero_Securite_Sociale='"+dbname[0]+"',"+"Nom='"+dbname[1]+"',Prenom='"+dbname[2]+"',Date_Naissance='"+dbname[3]+"',Numero_Telephone='"+dbname[4]+"',E_Mail='"+dbname[5]+"',Code_Soin='"+dbname[7]+"',Montant_Remboursement='"+dbname[8]+"' WHERE ID_Remboursement="+dbname[6];
+				         String uri = "jdbc:"+a[4]+"://localhost:"+a[3]+"/"+a[0].replaceAll("[\\[\\]]", "")+"?serverTimezone=UTC&useSSL=false";
+						 String query1 = "UPDATE remboursement " + "SET Numero_Securite_Sociale='"+dbname[0]+"',"+"Nom='"+dbname[1]+"',Prenom='"+dbname[2]+"',Date_Naissance='"+dbname[3]+"',Numero_Telephone='"+dbname[4]+"',E_Mail='"+dbname[5]+"',Code_Soin='"+dbname[7]+"',Montant_Remboursement='"+dbname[8]+"' WHERE ID_Remboursement="+dbname[6];
 						 String query2 = "INSERT INTO historic " + "VALUES ("+dbname[6]+","+"'UPDATE',"+"'"+dbname[9]+"'"+")";
 						 String users= a[1].toString();
 						 String mdps= a[2].toString();
