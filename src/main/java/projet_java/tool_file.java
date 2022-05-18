@@ -49,7 +49,7 @@ public interface tool_file {
 	}
 	
 	
-	public static void initdir()  {//je crée mes deux fichier rejet et traité dans le repetoire courant du projet (ou il a le pom.xml)
+	public static void initdir()  {//je crée mes deux fichier rejet et traité dans le repetoire courant du projet/target
 		File theDir = new File("rejet");
 		if (!theDir.exists()){
 		    theDir.mkdirs();
